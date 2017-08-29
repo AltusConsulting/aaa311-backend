@@ -1,11 +1,11 @@
 # AAA311-Backend
 
-This backend project is used with the [Smart cities](https://gitlab.priv.als/witcher/Smart_Cities/commits/open-source) application to authenticate and authorize users.
+This backend project is used with the [Smart cities](https://github.com/AltusConsulting/smart-cities) application to authenticate and authorize users.
 
 
 ## Getting Started
 
-To start using this project first you must install [Golang] (https://golang.org/dl/). 
+To start using this project first you must install [Golang](https://golang.org/dl/). 
 
 
 ### Prerequisites
@@ -65,7 +65,7 @@ This is the initial version. We use [SemVer](http://semver.org/) for versioning.
 
 ## Authors
 
-* [Altus Consulting Software Team] (https://github.com/AltusConsulting)
+* [Altus Consulting Software Team](https://github.com/AltusConsulting)
 
 ## License
 

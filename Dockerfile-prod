@@ -1,0 +1,4 @@
+FROM scratch
+COPY /aaa311 /opt/
+COPY /config.toml /opt/
+CMD ["/opt/aaa311"]

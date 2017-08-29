@@ -1,0 +1,12 @@
+[jwt]
+secret = "MyS3cr3tW0rd"
+
+[server]
+port = 9004
+
+[database]
+dir = "./database"
+
+[mail]
+sender = "<put your email address here>"
+smtp = "<put your smtp email address here"

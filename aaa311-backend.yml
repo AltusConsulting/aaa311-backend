@@ -1,0 +1,220 @@
+swagger: "2.0"
+info:
+  description: "This is the AAA API destinated for open source"
+  version: "1.0.0"
+  title: "AAA311 API"
+schemes:
+  - http
+produces:
+  - application/json
+consumes:
+  - application/json
+paths:
+  /ping:
+    get:
+      description: Ping
+      responses:
+        200:
+          description: Success
+          schema:
+            type: string
+  /authenticate:
+    post:
+      summary: Authentication
+      description: Authentication schema
+      parameters:
+        - in: body
+          name: body
+          description: Authentication schema
+          required: true
+          schema:
+            $ref: "#/definitions/Authentication"
+      responses:
+        200:
+          description: Success
+          schema:
+            $ref: "#/definitions/AuthResponse"
+        400:
+          description: Bad json error
+          schema: 
+            $ref: "#/definitions/Message"
+        401:
+          description: Unauthorized user
+          schema:
+            $ref: "#/definitions/Message"
+  /sign-up:
+    post:
+      summary: Sign up a user
+      description: Sign up a user without a token
+      parameters:
+        - in: body
+          name: body
+          description: User schema
+          required: true
+          schema:
+            $ref: "#/definitions/User"
+      responses:
+        200:
+          description: Success
+          schema:
+            $ref: "#/definitions/Message"
+        400:
+          description: Error
+          schema:
+            $ref: "#/definitions/Message"
+        500:
+          description: Error
+          schema:
+            $ref: "#/definitions/Message"
+  /recovery/password:
+    post:
+      summary: User password recovery
+      description: User password recovery via email
+      parameters:
+        - in: body
+          name: body
+          description: Recovery schema
+          required: true
+          schema:
+            $ref: "#/definitions/Authentication"
+      responses:
+        200:
+          description: Success
+          schema:
+            $ref: "#/definitions/Message"
+        400:
+          description: Error
+          schema:
+            $ref: "#/definitions/Message"
+        404:
+          description: User not found
+          schema:
+            $ref: "#/definitions/Message"
+        500:
+          description: Error
+          schema:
+            $ref: "#/definitions/Message"
+  /recovery/change-password:
+    post:
+      summary: Change user password
+      description: Change user password via email
+      parameters:
+        - in: body
+          name: body
+          description: Recovery schema
+          required: true
+          schema:
+            $ref: "#/definitions/Authentication"
+      responses:
+        200:
+          description: Success
+          schema:
+            $ref: "#/definitions/Message"
+        400:
+          description: Error
+          schema:
+            $ref: "#/definitions/Message"
+        500:
+          description: Error
+          schema:
+            $ref: "#/definitions/Message"
+  /users/{username}/roles:
+    parameters:
+      - name: username
+        in: path
+        description: username
+        required: true
+        type: string
+    get:
+      summary: Get roles by user
+      description: Get roles by user
+      responses:
+        200:
+          description: Success
+          schema:
+            $ref: "#/definitions/Message"
+        400:
+          description: Error
+          schema:
+            $ref: "#/definitions/Message"
+    post:
+      summary: Create role by user
+      description: Create role by user
+      parameters:
+        - in: body
+          name: body
+          required: true
+          description: Role schema
+          schema:
+            $ref: "#/definitions/Role"
+      responses:
+        200:
+          description: Success
+          schema:
+            $ref: "#/definitions/Message"
+        400:
+          description: Error
+          schema:
+            $ref: "#/definitions/Message"
+  /{username}/roles/{role}:
+    parameters:
+      - name: username
+        in: path
+        required: true
+        type: string
+      - name: role
+        in: path
+        required: true
+        type: string
+    delete:
+      summary: Delete role by user
+      description: Delete role by user
+      responses:
+        200:
+          description: Success
+          schema:
+            $ref: "#/definitions/Message"
+        400:
+          description: Error
+          schema:
+            $ref: "#/definitions/Message"
+definitions:
+  Authentication:
+    type: object
+    properties:
+      Username:
+        type: string
+      Password:
+        type: string
+  AuthResponse:
+    type: object
+    properties:
+      aaa:
+        type: string
+  User:
+    type: object
+    properties:
+      Username:
+        type: string
+      Firstname:
+        type: string
+      Lastname:
+        type: string
+      Email:
+        type: string
+      Password:
+        type: string
+      Roles:
+        type: array
+        items:
+          $ref: "#/definitions/Role"
+  Role:
+    type: object
+    properties:
+      Name:
+        type: string
+  Message:
+    type: object
+    properties:
+      message: 
+        type: string

@@ -1,0 +1,6 @@
+FROM gitlab.priv.als:5050/docker/go-project:master
+ENV CGO_ENABLED 0
+WORKDIR /go/src/aaa311
+COPY . /go/src/aaa311/
+RUN go get -v \
+    && go build -a -v -ldflags '-d -s -w' -tags netgo -installsuffix netgo
